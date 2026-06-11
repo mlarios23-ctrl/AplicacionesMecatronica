@@ -11,7 +11,7 @@ export const mechatronicsApplications = [
       software: "Firmware de procesamiento digital de señales (DSP) en tiempo real con latencias inferiores a 50 milisegundos para evitar desconexión perceptiva."
     },
     iconName: "Activity",
-    youtubeId: "7-3TsuR75G4" // Hero Arm demo
+    youtubeId: "ywlr1QWm_ho" // Hero Arm demo
   },
   {
     id: 2,

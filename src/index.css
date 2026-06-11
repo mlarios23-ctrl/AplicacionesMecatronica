@@ -756,9 +756,9 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1;
 }
 
-/* Even cards: flip figure/video order */
+/* Even cards: flip figure/simulation order */
 .card-even .figure-block { order: 2; }
-.card-even .video-block  { order: 1; }
+.card-even .simulation-block  { order: 1; }
 
 .media-block {
   display: flex;
@@ -824,10 +824,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 .svg-figure:hover { transform: scale(1.02); }
 
-.yt-iframe-wrap {
-  width: 100%; height: 100%;
-  border: none;
-  background: #000;
+.simulation-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 @media (max-width: 1024px) {
@@ -838,7 +838,7 @@ h1, h2, h3, h4, h5, h6 {
   .app-card { padding: 28px 20px; }
   .app-card-media-grid { grid-template-columns: 1fr; gap: 20px; }
   .card-even .figure-block,
-  .card-even .video-block { order: unset; }
+  .card-even .simulation-block { order: unset; }
   .app-card-big-number { font-size: 6rem; top: -8px; right: 12px; }
 }
 
@@ -1279,4 +1279,467 @@ h1, h2, h3, h4, h5, h6 {
 @keyframes grid-slow-slide {
   from { transform: translate(-25%, -25%) rotate(0deg); }
   to   { transform: translate(-25%, -25%) rotate(10deg); }
+}
+
+/* ====================================================================
+   10 CUSTOM MECHATRONIC SIMULATIONS — DYNAMIC CSS ANIMATIONS
+   ==================================================================== */
+
+/* 1. EMG signal oscilloscope simulation & hand bionics */
+.fig-sim-emg .emg-signal-line {
+  animation: emg-scroll 3s linear infinite;
+}
+@keyframes emg-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-120px); }
+}
+.fig-sim-emg .emg-state-led {
+  animation: emg-led-pulse 3s ease-in-out infinite;
+}
+@keyframes emg-led-pulse {
+  0%, 15%, 85%, 100% { fill: rgba(139, 92, 246, 0.2); }
+  35%, 65% { fill: var(--accent-purple); filter: drop-shadow(0 0 4px var(--accent-purple)); }
+}
+.fig-sim-emg .emg-finger-index {
+  transform-origin: 2px 14px;
+  animation: emg-finger-close 3s ease-in-out infinite;
+}
+.fig-sim-emg .emg-finger-middle {
+  transform-origin: 5px 14px;
+  animation: emg-finger-close 3s ease-in-out infinite;
+}
+.fig-sim-emg .emg-finger-ring {
+  transform-origin: 8px 14px;
+  animation: emg-finger-close 3s ease-in-out infinite;
+}
+.fig-sim-emg .emg-finger-pinky {
+  transform-origin: 11px 14px;
+  animation: emg-finger-close 3s ease-in-out infinite;
+}
+.fig-sim-emg .emg-finger-thumb {
+  transform-origin: -1px 16px;
+  animation: emg-thumb-close 3s ease-in-out infinite;
+}
+@keyframes emg-finger-close {
+  0%, 15%, 85%, 100% { transform: rotate(0deg); }
+  35%, 65% { transform: rotate(115deg) scaleY(0.4); }
+}
+@keyframes emg-thumb-close {
+  0%, 15%, 85%, 100% { transform: rotate(0deg); }
+  35%, 65% { transform: rotate(50deg) scaleX(0.7); }
+}
+
+/* 2. AMR grid pathfinding navigation */
+.fig-sim-amr-path .amr-obstacle-pulse {
+  animation: obstacle-glow 2s ease-in-out infinite alternate;
+}
+@keyframes obstacle-glow {
+  0% { fill: rgba(239, 68, 68, 0.1); stroke-width: 1px; }
+  100% { fill: rgba(239, 68, 68, 0.25); stroke-width: 1.5px; }
+}
+.fig-sim-amr-path .amr-computed-path {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: path-calculate 6s ease-in-out infinite;
+}
+@keyframes path-calculate {
+  0% { stroke-dashoffset: 200; }
+  40%, 100% { stroke-dashoffset: 0; }
+}
+.fig-sim-amr-path .amr-traveling-dot {
+  offset-path: path("M 15 15 L 15 55 L 35 75 L 75 75");
+  animation: travel-path 6s ease-in-out infinite;
+}
+@keyframes travel-path {
+  0% { offset-distance: 0%; opacity: 0; }
+  5% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+.fig-sim-amr-path .amr-sensor-sweep {
+  transform-origin: 0px 0px;
+  animation: sweep-rotate 1.5s ease-in-out infinite alternate;
+}
+@keyframes sweep-rotate {
+  0% { transform: rotate(-50deg); }
+  100% { transform: rotate(50deg); }
+}
+
+/* 3. Laser welding nozzle, HUD status & sparks */
+.fig-sim-welding .laser-nozzle-group,
+.fig-sim-welding .welding-sparks {
+  animation: weld-sweep 6s ease-in-out infinite alternate;
+}
+@keyframes weld-sweep {
+  0% { transform: translate(-30px, 1px); }
+  50% { transform: translate(0px, -4px); }
+  100% { transform: translate(30px, 1px); }
+}
+.fig-sim-welding .laser-beam {
+  animation: laser-beam-pulse 0.1s linear infinite alternate;
+}
+@keyframes laser-beam-pulse {
+  0% { stroke: rgba(239, 68, 68, 0.9); stroke-width: 2.2px; }
+  100% { stroke: rgba(248, 113, 113, 0.6); stroke-width: 1.5px; }
+}
+.fig-sim-welding .welded-seam-glow {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: weld-seam-fill 12s linear infinite;
+}
+@keyframes weld-seam-fill {
+  0% { stroke-dashoffset: 100; }
+  50% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 0; opacity: 0.2; }
+}
+.fig-sim-welding .hud-laser-active {
+  animation: laser-active-fade 6s ease-in-out infinite alternate;
+}
+.fig-sim-welding .hud-laser-idle {
+  animation: laser-idle-fade 6s ease-in-out infinite alternate;
+}
+@keyframes laser-active-fade {
+  0%, 25% { opacity: 0; }
+  35%, 65% { opacity: 1; }
+  75%, 100% { opacity: 0; }
+}
+@keyframes laser-idle-fade {
+  0%, 25% { opacity: 1; }
+  35%, 65% { opacity: 0; }
+  75%, 100% { opacity: 1; }
+}
+.fig-sim-welding .spark {
+  transform-origin: 50px 71px;
+}
+.fig-sim-welding .spark-1 { animation: spark-shoot-1 0.4s ease-out infinite; }
+.fig-sim-welding .spark-2 { animation: spark-shoot-2 0.3s ease-out infinite; animation-delay: 0.1s; }
+.fig-sim-welding .spark-3 { animation: spark-shoot-3 0.5s ease-out infinite; animation-delay: 0.2s; }
+.fig-sim-welding .spark-4 { animation: spark-shoot-4 0.4s ease-out infinite; animation-delay: 0.05s; }
+.fig-sim-welding .spark-5 { animation: spark-shoot-5 0.35s ease-out infinite; animation-delay: 0.15s; }
+
+@keyframes spark-shoot-1 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(-10px, -12px) scale(0.2); opacity: 0; }
+}
+@keyframes spark-shoot-2 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(12px, -8px) scale(0.2); opacity: 0; }
+}
+@keyframes spark-shoot-3 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(-2px, -16px) scale(0.2); opacity: 0; }
+}
+@keyframes spark-shoot-4 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(8px, -14px) scale(0.2); opacity: 0; }
+}
+@keyframes spark-shoot-5 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(-12px, -6px) scale(0.2); opacity: 0; }
+}
+
+/* 4. Drone PID control curve stabilization */
+.fig-sim-drone-pid .pid-noisy-line {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: wave-slide-in 6s ease-in-out infinite;
+}
+.fig-sim-drone-pid .pid-filtered-line {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: wave-slide-in 6s ease-in-out infinite;
+}
+@keyframes wave-slide-in {
+  0% { stroke-dashoffset: 200; }
+  35%, 100% { stroke-dashoffset: 0; }
+}
+.fig-sim-drone-pid .pid-mini-drone {
+  animation: drone-pid-hover-move 6s ease-in-out infinite;
+}
+@keyframes drone-pid-hover-move {
+  0% { transform: translateY(25px); }
+  20% { transform: translateY(-12px); }
+  50% { transform: translateY(4px); }
+  75%, 100% { transform: translateY(0px); }
+}
+
+/* 5. ABS braking comparative animation & tail lights */
+.fig-sim-abs-lanes .abs-car-red {
+  animation: abs-red-drive 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+.fig-sim-abs-lanes .abs-car-green {
+  animation: abs-green-drive 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+.fig-sim-abs-lanes .abs-pulse-ring {
+  transform-origin: 5px 0px;
+  animation: abs-ring-ripple 0.3s linear infinite;
+}
+.fig-sim-abs-lanes .abs-skid-mark {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: skid-appear 6s linear infinite;
+}
+.fig-sim-abs-lanes .abs-brake-light {
+  animation: abs-brake-light-glow 6s linear infinite;
+}
+@keyframes abs-red-drive {
+  0%   { transform: translate(15px, 20px) rotate(0deg); }
+  25%  { transform: translate(40px, 20px) rotate(0deg); }
+  40%  { transform: translate(65px, 15px) rotate(35deg); }
+  60%  { transform: translate(85px, 25px) rotate(180deg); }
+  80%, 100% { transform: translate(105px, 20px) rotate(210deg); }
+}
+@keyframes abs-green-drive {
+  0%   { transform: translate(15px, 52px); }
+  25%  { transform: translate(40px, 52px); }
+  50%, 100% { transform: translate(75px, 52px); }
+}
+@keyframes abs-ring-ripple {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+@keyframes skid-appear {
+  0%, 25% { stroke-dashoffset: 100; opacity: 0; }
+  35% { opacity: 1; }
+  80% { stroke-dashoffset: 0; opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes abs-brake-light-glow {
+  0%, 25% { fill: rgba(220, 38, 38, 0.2); }
+  26%, 100% { fill: rgb(239, 68, 68); filter: drop-shadow(0 0 2px rgb(239, 68, 68)); }
+}
+
+/* 6. Robot vacuum vSLAM mapping spiral & HUD percent */
+.fig-sim-slam-grid .slam-robot-node {
+  animation: slam-robot-spiral 10s linear infinite;
+}
+.fig-sim-slam-grid .slam-sensor-beam {
+  animation: slam-robot-spiral 10s linear infinite;
+  transform-origin: 50px 50px;
+}
+@keyframes slam-robot-spiral {
+  0%   { transform: translate(0px, 0px); }
+  12%  { transform: translate(0px, -30px); }
+  25%  { transform: translate(16px, -30px); }
+  37%  { transform: translate(16px, -14px); }
+  50%  { transform: translate(16px, 6px); }
+  62%  { transform: translate(0px, 6px); }
+  75%  { transform: translate(-16px, 6px); }
+  87%  { transform: translate(-16px, -14px); }
+  100% { transform: translate(-16px, -30px); }
+}
+.fig-sim-slam-grid .slam-cell {
+  opacity: 0.05;
+  transition: opacity 0.3s;
+}
+.fig-sim-slam-grid .cell-1 { animation: cell-clean 10s linear infinite; animation-delay: 1.2s; }
+.fig-sim-slam-grid .cell-2 { animation: cell-clean 10s linear infinite; animation-delay: 2.5s; }
+.fig-sim-slam-grid .cell-3 { animation: cell-clean 10s linear infinite; animation-delay: 3.7s; }
+.fig-sim-slam-grid .cell-4 { animation: cell-clean 10s linear infinite; animation-delay: 5s; }
+.fig-sim-slam-grid .cell-5 { animation: cell-clean 10s linear infinite; animation-delay: 6.2s; }
+.fig-sim-slam-grid .cell-6 { animation: cell-clean 10s linear infinite; animation-delay: 7.5s; }
+.fig-sim-slam-grid .cell-7 { animation: cell-clean 10s linear infinite; animation-delay: 8.7s; }
+.fig-sim-slam-grid .cell-8 { animation: cell-clean 10s linear infinite; animation-delay: 10s; }
+
+@keyframes cell-clean {
+  0% { opacity: 0.05; fill: rgba(13, 148, 136, 0.15); }
+  15%, 100% { opacity: 1; fill: rgba(14, 165, 233, 0.25); }
+}
+.fig-sim-slam-grid .slam-pct {
+  opacity: 0;
+}
+.fig-sim-slam-grid .pct-1 { animation: pct-show-1 10s linear infinite; }
+.fig-sim-slam-grid .pct-2 { animation: pct-show-2 10s linear infinite; }
+.fig-sim-slam-grid .pct-3 { animation: pct-show-3 10s linear infinite; }
+.fig-sim-slam-grid .pct-4 { animation: pct-show-4 10s linear infinite; }
+.fig-sim-slam-grid .pct-5 { animation: pct-show-5 10s linear infinite; }
+.fig-sim-slam-grid .pct-6 { animation: pct-show-6 10s linear infinite; }
+.fig-sim-slam-grid .pct-7 { animation: pct-show-7 10s linear infinite; }
+.fig-sim-slam-grid .pct-8 { animation: pct-show-8 10s linear infinite; }
+
+@keyframes pct-show-1 { 0%, 12.5% { opacity: 1; } }
+@keyframes pct-show-2 { 12.5%, 25% { opacity: 1; } }
+@keyframes pct-show-3 { 25%, 37.5% { opacity: 1; } }
+@keyframes pct-show-4 { 37.5%, 50% { opacity: 1; } }
+@keyframes pct-show-5 { 50%, 62.5% { opacity: 1; } }
+@keyframes pct-show-6 { 62.5%, 75% { opacity: 1; } }
+@keyframes pct-show-7 { 75%, 87.5% { opacity: 1; } }
+@keyframes pct-show-8 { 87.5%, 100% { opacity: 1; } }
+
+/* 7. Da Vinci surgical control tremor filter */
+.fig-sim-surgery-filter .surgery-shaky-pointer {
+  animation: surgery-orbit-move 6s linear infinite, surgery-tremor 0.08s linear infinite;
+  transform-origin: 30px 35px;
+}
+.fig-sim-surgery-filter .surgery-smooth-pointer {
+  animation: surgery-orbit-move 6s linear infinite;
+  transform-origin: 90px 35px;
+}
+@keyframes surgery-orbit-move {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes surgery-tremor {
+  0%, 100% { translate: 0px 0px; }
+  25% { translate: -1px 0.8px; }
+  50% { translate: 1.2px -1px; }
+  75% { translate: -0.8px -1.2px; }
+}
+.fig-sim-surgery-filter .surgery-shaky-path,
+.fig-sim-surgery-filter .surgery-smooth-path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: surgery-draw-loop 6s linear infinite;
+}
+@keyframes surgery-draw-loop {
+  0% { stroke-dashoffset: 100; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* 8. Smart agricultural planter seed dosing scroll & LED indicator */
+.fig-sim-agri-seeder .agri-ground-scroll {
+  animation: agri-scroll-ground 12s linear infinite;
+}
+@keyframes agri-scroll-ground {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-120px); }
+}
+.fig-sim-agri-seeder .agri-seeder-wheel {
+  transform-origin: 60px 22px;
+  animation: agri-wheel-gait 12s linear infinite;
+}
+@keyframes agri-wheel-gait {
+  0%, 33.3% { transform: rotate(0deg); }
+  33.3% { transform: rotate(120deg); }
+  33.3%, 66.6% { transform: rotate(120deg); }
+  66.6% { transform: rotate(480deg); }
+  66.6%, 100% { transform: rotate(480deg); }
+  100% { transform: rotate(1200deg); }
+}
+.fig-sim-agri-seeder .agri-seed {
+  animation: seed-fall-down 1.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) infinite;
+}
+.fig-sim-agri-seeder .seed-a { animation-delay: 0s; }
+.fig-sim-agri-seeder .seed-b { animation-delay: 0.4s; }
+.fig-sim-agri-seeder .seed-c { animation-delay: 0.8s; }
+
+@keyframes seed-fall-down {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(28px) scale(0.5); opacity: 0; }
+}
+.fig-sim-agri-seeder .agri-sensor-line {
+  animation: sensor-sweep-line 2s ease-in-out infinite alternate;
+}
+@keyframes sensor-sweep-line {
+  0% { opacity: 0.4; }
+  100% { opacity: 1; filter: brightness(1.2); }
+}
+.fig-sim-agri-seeder .dose-label-dry { animation: dry-label-glow 12s linear infinite; }
+.fig-sim-agri-seeder .dose-label-opt { animation: opt-label-glow 12s linear infinite; }
+.fig-sim-agri-seeder .dose-label-wet { animation: wet-label-glow 12s linear infinite; }
+
+@keyframes dry-label-glow {
+  0%, 33.3% { opacity: 1; }
+  33.4%, 100% { opacity: 0; }
+}
+@keyframes opt-label-glow {
+  0%, 33.3% { opacity: 0; }
+  33.4%, 66.6% { opacity: 1; }
+  66.7%, 100% { opacity: 0; }
+}
+@keyframes wet-label-glow {
+  0%, 66.6% { opacity: 0; }
+  66.7%, 100% { opacity: 1; }
+}
+
+/* 9. 3D Printer melt-zone extrusion nozzle simulation & layers build */
+.fig-sim-print-nozzle .nozzle-heater-block {
+  animation: heater-pulse 2s ease-in-out infinite alternate;
+}
+@keyframes heater-pulse {
+  0% { fill: rgba(239, 68, 68, 0.15); stroke: rgb(239, 68, 68); }
+  100% { fill: rgba(239, 68, 68, 0.3); stroke: rgb(248, 113, 113); filter: drop-shadow(0 0 2px rgba(239, 68, 68, 0.3)); }
+}
+.fig-sim-print-nozzle .solid-filament {
+  animation: filament-in 2s linear infinite;
+}
+@keyframes filament-in {
+  0% { stroke-dasharray: 40; stroke-dashoffset: 0; }
+  100% { stroke-dasharray: 40; stroke-dashoffset: -12px; }
+}
+.fig-sim-print-nozzle .liquid-bead {
+  animation: liquid-drip 1.2s cubic-bezier(0.55, 0.085, 0.68, 0.53) infinite;
+}
+.fig-sim-print-nozzle .bead-1 { animation-delay: 0s; }
+.fig-sim-print-nozzle .bead-2 { animation-delay: 0.6s; }
+
+@keyframes liquid-drip {
+  0% { transform: translateY(0) scale(0.8); opacity: 0.8; }
+  80% { opacity: 1; }
+  100% { transform: translateY(15px) scale(0.3); opacity: 0; }
+}
+.fig-sim-print-nozzle .printed-layer {
+  animation: print-layer-build 6s ease-in-out infinite;
+}
+.fig-sim-print-nozzle .layer-1 { animation-delay: 0s; }
+.fig-sim-print-nozzle .layer-2 { animation-delay: 2s; }
+.fig-sim-print-nozzle .layer-3 { animation-delay: 4s; }
+
+@keyframes print-layer-build {
+  0% { stroke-dashoffset: 80; }
+  35%, 100% { stroke-dashoffset: 0; }
+}
+
+/* 10. Humanoid neural gait cycle coordination & legs */
+.fig-sim-humanoid-net .pulse-1 { animation: net-send-1 3.5s linear infinite; }
+.fig-sim-humanoid-net .pulse-2 { animation: net-send-2 3.5s linear infinite; animation-delay: 1.1s; }
+.fig-sim-humanoid-net .pulse-3 { animation: net-send-3 3.5s linear infinite; animation-delay: 2.2s; }
+
+@keyframes net-send-1 {
+  0%   { cx: 10px; cy: 25px; opacity: 1; }
+  50%  { cx: 35px; cy: 15px; }
+  100% { cx: 60px; cy: 35px; opacity: 0.2; }
+}
+@keyframes net-send-2 {
+  0%   { cx: 10px; cy: 50px; opacity: 1; }
+  50%  { cx: 35px; cy: 35px; }
+  100% { cx: 60px; cy: 60px; opacity: 0.2; }
+}
+@keyframes net-send-3 {
+  0%   { cx: 10px; cy: 75px; opacity: 1; }
+  50%  { cx: 35px; cy: 75px; }
+  100% { cx: 60px; cy: 60px; opacity: 0.2; }
+}
+.fig-sim-humanoid-net .node-left .node-glow {
+  transform-origin: 60px 35px;
+  animation: gait-sway-left 2s ease-in-out infinite alternate;
+}
+.fig-sim-humanoid-net .node-right .node-glow {
+  transform-origin: 60px 60px;
+  animation: gait-sway-right 2s ease-in-out infinite alternate;
+}
+@keyframes gait-sway-left {
+  0%, 35% { transform: scale(1.4); opacity: 1; fill: var(--accent-purple); filter: drop-shadow(0 0 3px var(--accent-purple)); }
+  65%, 100% { transform: scale(0.8); opacity: 0.3; }
+}
+@keyframes gait-sway-right {
+  0%, 35% { transform: scale(0.8); opacity: 0.3; }
+  65%, 100% { transform: scale(1.4); opacity: 1; fill: var(--accent-cyan); filter: drop-shadow(0 0 3px var(--accent-cyan)); }
+}
+.fig-sim-humanoid-net .gait-leg-left {
+  transform-origin: 15px 15px;
+  animation: leg-walk-left 2s ease-in-out infinite alternate;
+}
+.fig-sim-humanoid-net .gait-leg-right {
+  transform-origin: 15px 15px;
+  animation: leg-walk-right 2s ease-in-out infinite alternate;
+}
+@keyframes leg-walk-left {
+  0% { transform: rotate(-22deg); }
+  100% { transform: rotate(15deg); }
+}
+@keyframes leg-walk-right {
+  0% { transform: rotate(15deg); }
+  100% { transform: rotate(-22deg); }
 }
