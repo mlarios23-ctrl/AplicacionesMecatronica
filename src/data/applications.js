@@ -11,7 +11,8 @@ export const mechatronicsApplications = [
       software: "Firmware de procesamiento digital de señales (DSP) en tiempo real con latencias inferiores a 50 milisegundos para evitar desconexión perceptiva."
     },
     iconName: "Activity",
-    youtubeId: "ywlr1QWm_ho" // Hero Arm demo
+    youtubeId: "ywlr1QWm_ho", // Hero Arm demo
+    controlVideoId: "FDy9I11Cdng"
   },
   {
     id: 2,
@@ -25,7 +26,8 @@ export const mechatronicsApplications = [
       software: "Sistemas de navegación SLAM (Localización y Mapeo Simultáneos) integrados con ROS (Robot Operating System) y algoritmos de optimización de rutas como A*."
     },
     iconName: "Truck",
-    youtubeId: "8e03_Psk3Q0" // Amazon Kiva Robots
+    youtubeId: "8e03_Psk3Q0", // Amazon Kiva Robots
+    controlVideoId: "BaMZzG347Jw"
   },
   {
     id: 3,
@@ -39,7 +41,8 @@ export const mechatronicsApplications = [
       software: "Programación de tareas en tiempo real mediante lenguajes propietarios (ej. RAPID, KRL) y sistemas de visión artificial para guiar al manipulador."
     },
     iconName: "Cpu",
-    youtubeId: "JmyJ765vTVE" // Industrial Robot Arm demo
+    youtubeId: "JmyJ765vTVE", // Industrial Robot Arm demo
+    controlVideoId: "knq67lGmexw"
   },
   {
     id: 4,
@@ -53,7 +56,8 @@ export const mechatronicsApplications = [
       software: "Algoritmos de fusión de sensores (Filtro de Kalman) para estimar la posición y orientación reales, y software de pilotaje autónomo (ArduPilot/PX4)."
     },
     iconName: "Navigation",
-    youtubeId: "w2itwFJCgFQ" // Drone swarm and autonomous flying
+    youtubeId: "w2itwFJCgFQ", // Drone swarm and autonomous flying
+    controlVideoId: "kIBU_R-TsGA"
   },
   {
     id: 5,
@@ -67,7 +71,8 @@ export const mechatronicsApplications = [
       software: "Firmware de seguridad crítica integrado con buses de comunicación CAN-bus, operando con esquemas de redundancia y diagnóstico de fallas (Fail-safe)."
     },
     iconName: "ShieldAlert",
-    youtubeId: "mKiTAcXK7M4" // ABS & ESP system explanation
+    youtubeId: "mKiTAcXK7M4", // ABS & ESP system explanation
+    controlVideoId: "thWuV_h0PJY"
   },
   {
     id: 6,
@@ -81,7 +86,8 @@ export const mechatronicsApplications = [
       software: "Algoritmos de localización visual e infrarroja (vSLAM), estimación de cobertura de habitaciones y comunicación IoT vía Wi-Fi para control desde smartphones."
     },
     iconName: "Home",
-    youtubeId: "9G1VexJvFj0" // How Roomba Works
+    youtubeId: "9G1VexJvFj0", // How Roomba Works
+    controlVideoId: "HRtXpFBZuNo"
   },
   {
     id: 7,
@@ -95,7 +101,8 @@ export const mechatronicsApplications = [
       software: "Procesamiento de imágenes estereoscópicas en tiempo real, algoritmos activos de filtrado de temblor fisiológico y protocolos médicos con tolerancia a fallas extrema."
     },
     iconName: "Scissors",
-    youtubeId: "0Ad_Zp55B5M" // Da Vinci Robotic Surgery demo
+    youtubeId: "0Ad_Zp55B5M", // Da Vinci Robotic Surgery demo
+    controlVideoId: "F4v6F42PhaE"
   },
   {
     id: 8,
@@ -109,7 +116,8 @@ export const mechatronicsApplications = [
       software: "Integración de Sistemas de Información Geográfica (SIG), mapas de prescripción digitalizados y telemetría en la nube para monitoreo agrícola distribuido."
     },
     iconName: "Sprout",
-    youtubeId: "c2M9v2394gA" // John Deere autonomous tractor
+    youtubeId: "c2M9v2394gA", // John Deere autonomous tractor
+    controlVideoId: "gXbJA1XD0tU"
   },
   {
     id: 9,
@@ -123,7 +131,8 @@ export const mechatronicsApplications = [
       software: "Firmwares integrados de alto rendimiento (ej. Marlin, Klipper) encargados de decodificar comandos G-code en tiempo real y sincronizar temperatura con movimiento."
     },
     iconName: "Printer",
-    youtubeId: "rI_7K3q9eWw" // CoreXY/3D printing tech explanation
+    youtubeId: "rI_7K3q9eWw", // CoreXY/3D printing tech explanation
+    controlVideoId: "ScZYcQuZh-4"
   },
   {
     id: 10,
@@ -137,7 +146,8 @@ export const mechatronicsApplications = [
       software: "Procesamiento del lenguaje natural (NLP), visión estereoscópica orientada al reconocimiento facial/objetos, y algoritmos de aprendizaje por refuerzo profundo."
     },
     iconName: "User",
-    youtubeId: "fRj34o4hN4I" // Boston Dynamics Atlas gymnastics
+    youtubeId: "fRj34o4hN4I", // Boston Dynamics Atlas gymnastics
+    controlVideoId: "s5CxqRWaThw"
   }
 ];
 
